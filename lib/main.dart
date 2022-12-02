@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
+import 'package:travel_app/representation/screens/main_app.dart';
 import 'package:travel_app/routes.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: ColorPalette.primaryColor,
           scaffoldBackgroundColor: ColorPalette.backgroundScaffoldColor,
-          backgroundColor: ColorPalette.backgroundScaffoldColor),
+          backgroundColor: ColorPalette.backgroundColor),
       home: const MyHomePage(),
       routes: routes,
     );
@@ -30,7 +31,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Container(
+        child: MainApp(),
+      ),
     );
   }
 }
