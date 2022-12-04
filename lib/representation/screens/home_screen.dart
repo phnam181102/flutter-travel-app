@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
-import 'package:travel_app/representation/widgets/button_widget.dart';
 import 'package:travel_app/representation/widgets/card_widget.dart';
+import 'package:travel_app/representation/widgets/notification_button_widget.dart';
 
 import '../../core/constants/textstyle_constants.dart';
 
@@ -47,14 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ]),
             ),
             Spacer(),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: ColorPalette.backgroundColor,
-              ),
-              child: SvgPicture.asset("assets/icons/bell.svg"),
-            ),
+            NotificationBtnWidget(),
           ],
         ),
         SizedBox(
@@ -109,11 +103,24 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(
           height: 16,
         ),
-        Row(
-          children: [
-            Container(
-              child: CardWidget(),
-            )
+        // Row(
+        //   children: [
+        //     Container(
+        //       child: CardWidget(),
+        //     )
+        //   ],
+        // )
+        CarouselSlider(
+          options: CarouselOptions(
+            height: 382.0,
+            enableInfiniteScroll: false,
+            padEnds: false,
+          ),
+          items: [
+            CardWidget(),
+            CardWidget(),
+            CardWidget(),
+            CardWidget(),
           ],
         )
       ]),

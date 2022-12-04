@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
+import 'package:travel_app/representation/screens/schedule_screen.dart';
 
 import 'home_screen.dart';
 
@@ -14,12 +15,10 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text(
-      'Calendar Screen',
-    ),
+    ScheduleScreen(),
     Text(
       'Search Screen',
     ),
@@ -42,7 +41,7 @@ class _MainAppState extends State<MainApp> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-            padding: EdgeInsets.fromLTRB(20, 28, 20, 0),
+            padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
             child: Center(
               child: _widgetOptions.elementAt(_selectedIndex),
             )),

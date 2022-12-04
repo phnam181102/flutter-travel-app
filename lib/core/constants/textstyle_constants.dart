@@ -30,8 +30,8 @@ extension ExtendedTextStyle on TextStyle {
 
   TextStyle get fontCaption {
     return copyWith(
-      fontSize: 12,
-      height: 12 / 10,
+      fontSize: 13.5,
+      height: 12 / 8,
     );
   }
 
