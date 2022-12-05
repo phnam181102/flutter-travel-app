@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
+import 'package:travel_app/pages/Destination/Destination.dart';
+import 'package:travel_app/pages/Profile/Profile.dart';
+import 'package:travel_app/pages/Search/Search.dart';
 import 'package:travel_app/routes.dart';
 
 void main() {
@@ -30,7 +33,13 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Stack(
+        children: <Widget> [
+          // Destination(),
+          Search(),
+          // Profile(),
+        ],
+      ),
     );
   }
 }
