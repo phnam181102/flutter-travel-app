@@ -92,8 +92,8 @@ class _DetailScreenState extends State<DetailScreen> {
                         children: [
                           Text(
                             '${widget.tripModel.name}',
-                            style:
-                                TextStyles.defaultStyle.medium.setTextSize(24),
+                            style: TextStyles.defaultStyle.semibold
+                                .setTextSize(24),
                           ),
                           SizedBox(
                             height: 7,
