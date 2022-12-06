@@ -12,15 +12,18 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(vertical: 18),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: ColorPalette.primaryColor),
-      child: Text(
-        title,
-        style: TextStyles.defaultStyle.medium.setTextSize(17).whiteTextColor,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(vertical: 18),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: ColorPalette.primaryColor),
+        child: Text(
+          title,
+          style: TextStyles.defaultStyle.medium.setTextSize(17).whiteTextColor,
+        ),
       ),
     );
   }

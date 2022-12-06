@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
+import 'package:travel_app/representation/screens/profile_screen.dart';
 import 'package:travel_app/representation/screens/schedule_screen.dart';
+import 'package:travel_app/representation/screens/search_screen.dart';
 
 import 'home_screen.dart';
 
@@ -15,19 +17,15 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     ScheduleScreen(),
+    SearchScreen(),
     Text(
-      'Search Screen',
+      '',
     ),
-    Text(
-      'Messages Screen',
-    ),
-    Text(
-      'Profile Screen',
-    ),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

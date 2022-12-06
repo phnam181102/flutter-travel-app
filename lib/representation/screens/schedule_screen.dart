@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
 import 'package:travel_app/core/constants/textstyle_constants.dart';
+import 'package:travel_app/models/trip_model.dart';
+import 'package:travel_app/network/networkRequest.dart';
 import 'package:travel_app/representation/widgets/back_button_widget.dart';
 import 'package:travel_app/representation/widgets/mini_card_widget.dart';
 import 'package:travel_app/representation/widgets/notification_button_widget.dart';
@@ -14,6 +16,18 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
+  List<TripModel> tripModel = [];
+
+  @override
+  void initState() {
+    super.initState();
+    NetworkRequest.fetchTrips().then((dataFromServer) {
+      setState(() {
+        tripModel = dataFromServer;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -233,15 +247,29 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ],
         ),
         SizedBox(height: 16),
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              MiniCardWidget(),
-              MiniCardWidget(),
-              MiniCardWidget(),
-            ],
-          ),
-        )
+        tripModel.isEmpty
+            ? (Container())
+            : (SingleChildScrollView(
+                child: Column(
+                  children: [
+                    MiniCardWidget(
+                      tripModel: tripModel[0],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    MiniCardWidget(
+                      tripModel: tripModel[1],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    MiniCardWidget(
+                      tripModel: tripModel[6],
+                    ),
+                  ],
+                ),
+              ))
       ]),
     );
   }

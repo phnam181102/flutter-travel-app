@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
 import 'package:travel_app/core/constants/textstyle_constants.dart';
+import 'package:travel_app/models/trip_model.dart';
 
 class MiniCardWidget extends StatelessWidget {
-  const MiniCardWidget({Key? key}) : super(key: key);
+  const MiniCardWidget({Key? key, required this.tripModel}) : super(key: key);
+
+  final TripModel tripModel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,14 @@ class MiniCardWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
-            child: Image.asset("assets/images/mini-img.png"),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: Image.network(
+              '${tripModel.img}',
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+            ),
           ),
           SizedBox(
             width: 16,
@@ -61,7 +67,7 @@ class MiniCardWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  "Niladri Reservoir",
+                  "${tripModel.name}",
                   style: TextStyles.defaultStyle.medium.setTextSize(16),
                 ),
                 Spacer(),
@@ -77,7 +83,7 @@ class MiniCardWidget extends StatelessWidget {
                       width: 6,
                     ),
                     Text(
-                      "Takergat, Sunamgnji",
+                      "${tripModel.address}",
                       style: TextStyles.defaultStyle
                           .setTextSize(13)
                           .setColor(ColorPalette.textColor2),

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
+import 'package:travel_app/models/trip_model.dart';
+import 'package:travel_app/representation/screens/destination_screen.dart';
 import 'package:travel_app/representation/widgets/card_widget.dart';
 import 'package:travel_app/representation/widgets/notification_button_widget.dart';
+import '../../network/networkRequest.dart';
 
 import '../../core/constants/textstyle_constants.dart';
 
@@ -15,6 +18,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<TripModel> tripModel = [];
+
+  @override
+  void initState() {
+    super.initState();
+    NetworkRequest.fetchTrips().then((dataFromServer) {
+      setState(() {
+        tripModel = dataFromServer;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -94,35 +109,43 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("Best Destination",
                 style: TextStyles.defaultStyle.setTextSize(20).semibold),
             Spacer(),
-            Text("View all",
-                style: TextStyles.defaultStyle
-                    .setColor(ColorPalette.primaryColor)
-                    .setTextSize(14))
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(DestinationScreen.routeName);
+              },
+              child: Text("View all",
+                  style: TextStyles.defaultStyle
+                      .setColor(ColorPalette.primaryColor)
+                      .setTextSize(14)),
+            )
           ],
         ),
         SizedBox(
           height: 16,
         ),
-        // Row(
-        //   children: [
-        //     Container(
-        //       child: CardWidget(),
-        //     )
-        //   ],
-        // )
-        CarouselSlider(
-          options: CarouselOptions(
-            height: 382.0,
-            enableInfiniteScroll: false,
-            padEnds: false,
-          ),
-          items: [
-            CardWidget(),
-            CardWidget(),
-            CardWidget(),
-            CardWidget(),
-          ],
-        )
+        tripModel.isEmpty
+            ? (Container())
+            : (CarouselSlider(
+                options: CarouselOptions(
+                  height: 382.0,
+                  enableInfiniteScroll: false,
+                  padEnds: false,
+                ),
+                items: [
+                  CardWidget(
+                    tripModel: tripModel[0],
+                  ),
+                  CardWidget(
+                    tripModel: tripModel[1],
+                  ),
+                  CardWidget(
+                    tripModel: tripModel[2],
+                  ),
+                  CardWidget(
+                    tripModel: tripModel[3],
+                  ),
+                ],
+              ))
       ]),
     );
   }

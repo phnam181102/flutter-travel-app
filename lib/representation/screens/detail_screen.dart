@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
 import 'package:travel_app/core/constants/textstyle_constants.dart';
+import 'package:travel_app/models/trip_model.dart';
+import 'package:travel_app/representation/screens/main_app.dart';
 import 'package:travel_app/representation/widgets/bookmark_widget.dart';
 import 'package:travel_app/representation/widgets/button_widget.dart';
 
 import '../widgets/back_button_widget.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  static const String routeName = '/detail_screen';
+  const DetailScreen({
+    Key? key,
+    required this.tripModel,
+  }) : super(key: key);
+
+  final TripModel tripModel;
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -25,7 +33,7 @@ class _DetailScreenState extends State<DetailScreen> {
             height: 480,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/image-detail.jpg"),
+                image: NetworkImage("${widget.tripModel.img}"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -34,7 +42,12 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    BackButtonWidget(mode: "white"),
+                    BackButtonWidget(
+                      mode: "white",
+                      onTap: () {
+                        Navigator.of(context).pushNamed(MainApp.routeName);
+                      },
+                    ),
                     Spacer(),
                     Container(
                       // alignment: Alignment.center,
@@ -54,7 +67,7 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
           Container(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-              margin: EdgeInsets.only(top: 302),
+              margin: EdgeInsets.only(top: 340),
               height: 455,
               width: 375,
               decoration: BoxDecoration(
@@ -78,14 +91,14 @@ class _DetailScreenState extends State<DetailScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Niladri Reservoir",
+                            '${widget.tripModel.name}',
                             style:
                                 TextStyles.defaultStyle.medium.setTextSize(24),
                           ),
                           SizedBox(
                             height: 7,
                           ),
-                          Text("Tekergat, Sunamgnji",
+                          Text("${widget.tripModel.address}",
                               style: TextStyles.defaultStyle
                                   .setTextSize(15)
                                   .setColor(ColorPalette.textColor2))
@@ -105,7 +118,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         SizedBox(
                           width: 3,
                         ),
-                        Text("Tekergat",
+                        Text("${widget.tripModel.address}",
                             style: TextStyles.defaultStyle
                                 .setTextSize(15)
                                 .setColor(ColorPalette.textColor2))
@@ -118,7 +131,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         SizedBox(
                           width: 3,
                         ),
-                        Text("4.7",
+                        Text("${widget.tripModel.rate}",
                             style: TextStyles.defaultStyle.setTextSize(15)),
                         SizedBox(
                           width: 1,
@@ -133,7 +146,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     Row(
                       children: [
                         Text(
-                          "\$59/",
+                          "\$${widget.tripModel.price}/",
                           style: TextStyles.defaultStyle
                               .setTextSize(15)
                               .setColor(ColorPalette.primaryColor),
@@ -164,7 +177,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   text: TextSpan(children: [
                                     TextSpan(
                                       text:
-                                          "You will get a complete travel package on the beaches. Packages in the form of airline tickets, recommended Hotel rooms, Transportation, Have you ever been on holiday to the Greek ETC... ",
+                                          'You will get a complete travel package on the beaches. Packages in the form of airline tickets, recommended Hotel rooms, Transportation, Have you ever been on holiday to the Greek ETC... ',
                                       style: TextStyles.defaultStyle.fontCaption
                                           .setColor(ColorPalette.textColor2),
                                     ),

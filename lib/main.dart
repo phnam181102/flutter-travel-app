@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
-import 'package:travel_app/representation/screens/main_app.dart';
+import 'package:travel_app/representation/screens/splash_screen.dart';
 import 'package:travel_app/routes.dart';
 
 void main() {
@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: ColorPalette.backgroundColor),
       home: const MyHomePage(),
       routes: routes,
+      onGenerateRoute: generateRoutes,
     );
   }
 }
@@ -32,7 +33,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: MainApp(),
+        child: SplashScreen(),
       ),
     );
   }
