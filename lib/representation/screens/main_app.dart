@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_app/core/constants/color_constants.dart';
+import 'package:travel_app/representation/screens/messages_screen.dart';
 import 'package:travel_app/representation/screens/profile_screen.dart';
 import 'package:travel_app/representation/screens/schedule_screen.dart';
 import 'package:travel_app/representation/screens/search_screen.dart';
@@ -22,9 +23,7 @@ class _MainAppState extends State<MainApp> {
     HomeScreen(),
     ScheduleScreen(),
     SearchScreen(),
-    Text(
-      '',
-    ),
+    MessagesScreen(),
     ProfileScreen(),
   ];
 
